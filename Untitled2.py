@@ -46,5 +46,5 @@ doc1.similarity(doc)
 # In[ ]:
 
 
-
+##output [6] and output [7]: 0.9707215035869386
 
