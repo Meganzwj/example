@@ -1,0 +1,22 @@
+from azure.core.credentials import AzureKeyCredential
+from azure.search.documents.indexes import SearchIndexClient
+from azure.search.documents.indexes.models import IndexDocumentsResult
+
+# Replace with your search service name and admin api key
+service_name = "<your-search-service-name>"
+admin_key = "<your-admin-api-key>"
+
+# Replace with your index name and data to upload
+index_name = "<your-index-name>"
+data_to_upload = [
+    {"id": "1", "title": "Python for Data Science", "author": "John Smith"},
+    {"id": "2", "title": "Introduction to Machine Learning", "author": "Jane Doe"}
+]
+
+# Create a search index client
+credential = AzureKeyCredential(admin_key)
+client = SearchIndexClient(endpoint="https://{}.search.windows.net/".format(service_name), index_name=index_name, credential=credential)
+
+# Upload the data to the index
+result: IndexDocumentsResult = client.upload_documents(documents=data_to_upload)
+print("Uploaded {} documents".format(result.results_count))
